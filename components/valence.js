@@ -47,7 +47,7 @@ export default function Valence({ valence, energy, danceability }) {
     }
 
     return (
-        <div className="card py-3">
+        <div className="card py-3 h-100">
             <div className="card-img-top display-1">{emoji}</div>
             <div className="card-body">
                 <h2 className="card-title">
