@@ -54,9 +54,9 @@ export default function Valence({ valence, energy, danceability }) {
                     Mood
                 </h2>
                 <p className="card-text">
-                    Valence: {valence.toFixed(2)*100}%<br/>
-                    Energy: {energy.toFixed(2)*100}%<br/>
-                    Danceability: {danceability.toFixed(2)*100}%<br/>
+                    Valence: {(valence * 100).toFixed(2)}%<br/>
+                    Energy: {(energy * 100).toFixed(2)}%<br/>
+                    Danceability: {(danceability * 100).toFixed(2)}%<br/>
                 </p>
             </div>
         </div>
