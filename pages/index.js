@@ -1,19 +1,26 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import Head from 'next/head'
 import { signIn, signOut, useSession } from 'next-auth/client'
 import Valence from '../components/valence'
+import Track from '../components/track'
+import FetchButton from '../components/fetch-button'
+import NavBar from '../components/nav-bar'
 
 export default function Page() {
     const [session, loadingAuth] = useSession()
     const [isFetchingTracks, setIsFetchingTracks] = useState(false)
     const [tracks, setTracks] = useState()
 
+    useEffect(() => {
+        const timer = setInterval(fetchTracks, 30000);
+        return () => clearInterval(timer);
+    });
+
     if (!session && !loadingAuth) {
         signIn()
     }
 
-    const handleClick = () => {
-        setIsFetchingTracks(true)
+    function fetchTracks() {
         fetch('api/top-tracks', {
             credentials: 'include'
         })
@@ -26,36 +33,64 @@ export default function Page() {
             .catch(() => {
                 signOut()
             })
+    }
+
+    const handleClick = () => {
+        setIsFetchingTracks(true)
+        fetchTracks()
     };
 
     return <>
         <Head>
             <title>Hackdays Q1 2021 - Spotify API test</title>
         </Head>
-        <nav className="navbar navbar-dark bg-dark">
-            <div className="container">
-                <a className="navbar-brand" href="#">Hackdays Q1 2021 Spotify test</a>
-                {session && <span className="navbar-text">Signed in as {session.user.email}</span>}
-                <button className="btn btn-secondary" onClick={() => signOut()}>Sign out</button>
-            </div>
-        </nav>
+        <NavBar 
+            session={session}
+            onSignOut={() => signOut()}
+        />
         <main className="container text-center py-5">
-            {tracks && (
+            {tracks ? (
                 <>
-                    <Valence value={tracks.medians.valence} />
+                    <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4">
+                        <div className="col">
+                            <Valence
+                                valence={tracks.medians.valence}
+                                danceability={tracks.medians.danceability}
+                                energy={tracks.medians.energy}
+                            />
+                        </div>
+                        <div className="col">
+                            Placeholder
+                        </div>
+                        <div className="col">
+                            Placeholder
+                        </div>
+                        <div className="col">
+                            Placeholder
+                        </div>
+                    </div>
+                    <h2 className="py-3">Based on these tracks:</h2>
+                    <div className="row row-cols-1 row-cols-sm-2 row-cols-lg-3 row-cols-xxl-4 g-4 text-start">
+                        {tracks.tracks.map(track => (
+                            <div className="col" key={track.id}>
+                                <Track track={track} />
+                            </div>
+                        ))}
+                    </div>
                 </>
+            ) : (
+                <div className="p-4 pb-5 rounded bg-light">
+                    <h1 className="display-4">What up</h1>
+                    <p className="lead py-3">
+                        Analyze the last 4 weeks of listening, and see what kind of mood you're in these days.
+                    </p>
+                    <FetchButton
+                        loading={isFetchingTracks}
+                        onClick={handleClick}
+                    />
+                </div>
             )}
-            <button
-                className="btn btn-primary"
-                onClick={handleClick}
-                disabled={isFetchingTracks}
-            >
-                {!isFetchingTracks && 'Get top tracks'}
-                {isFetchingTracks && <>
-                    <span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
-                    Loading...
-                </>}
-            </button>
+            
         </main>
     </>
 }

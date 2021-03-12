@@ -1,13 +1,14 @@
 import NextAuth from 'next-auth'
 import Providers from 'next-auth/providers'
+import SpotifyClient from '../../../lib/spotify-client'
 
 export default NextAuth({
     // Configure one or more authentication providers
     providers: [
         Providers.Spotify({
-            clientId: process.env.SPOTIFY_CLIENT_ID,
-            clientSecret: process.env.SPOTIFY_CLIENT_SECRET,
-            scope: 'user-read-email user-top-read',
+            clientId: SpotifyClient.CLIENT_ID,
+            clientSecret: SpotifyClient.CLIENT_SECRET,
+            scope: SpotifyClient.SCOPES,
         })
     ],
     callbacks: {
@@ -18,7 +19,7 @@ export default NextAuth({
             return token
         }
     },
-    secret: process.env.SPOTIFY_CLIENT_SECRET,
+    secret: SpotifyClient.CLIENT_SECRET,
     session: {
         jwt: true,        
         // Seconds - How long until an idle session expires and is no longer valid.
