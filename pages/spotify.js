@@ -86,7 +86,7 @@ export default function Page() {
                     <h2 className="py-3 mt-5">Based on these tracks:</h2>
                     <div className="row row-cols-1 row-cols-sm-2 row-cols-lg-3 row-cols-xxl-4 g-4 text-start">
                         {tracks.tracks.map(track => (
-                            <div className="col" key={track.id}>
+                            <div className="col" key={track.playedAt ?? track.id}>
                                 <Track track={track} />
                             </div>
                         ))}
