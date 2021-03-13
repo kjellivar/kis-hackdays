@@ -31,7 +31,7 @@ export default function Page() {
     }
 
     function fetchTracks() {
-        fetch('api/top-tracks', {
+        fetch('/api/spotify/top-tracks', {
             credentials: 'include'
         })
             .then(res => res.json())

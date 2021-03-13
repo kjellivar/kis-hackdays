@@ -1,6 +1,6 @@
 import jwt from 'next-auth/jwt'
 import { median, mode } from 'mathjs'
-import SpotifyClient from '../../lib/spotify-client'
+import SpotifyClient from '../../../lib/spotify-client'
 
 const secret = SpotifyClient.CLIENT_SECRET
 

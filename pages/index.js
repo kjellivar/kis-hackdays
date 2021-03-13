@@ -1,5 +1,4 @@
 import Head from 'next/head'
-import Link from 'next/link'
 
 export default function Page() {
     return <>
@@ -12,9 +11,9 @@ export default function Page() {
             <h2>2021</h2>
             <ul>
                 <li>
-                    <Link href="/spotify">
+                    <a href="/spotify">
                         Calculating mood based on Spotify listening habits
-                    </Link>
+                    </a>
                 </li>
             </ul>
         </div>
