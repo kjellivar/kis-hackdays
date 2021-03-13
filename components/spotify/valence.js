@@ -40,7 +40,7 @@ export default function Valence({ valence, energy, danceability }) {
         emoji = '😃'
     }
     if(isMetal) {
-        emoji = '👿'
+        emoji = '😈'
     }
     if(isEuphoric) {
         emoji = '🤩'
