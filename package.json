@@ -8,7 +8,7 @@
     "start": "next start"
   },
   "dependencies": {
-    "bootstrap": "5.0.0-beta3",
+    "bootstrap": "5.0.0",
     "mathjs": "9.3.2",
     "next": "10.2.0",
     "next-auth": "3.20.0",
