@@ -2,23 +2,22 @@
 Purpose of this repo is to gather my various hackdays projects in [one place](https://kis-hackdays.vercel.app) to spend less time on setup for each hackdays project. Made with next.js. Runs on node 14. Hosted on Vercel.
 
 ## Running locally
-Make sure you run with the following env variables set: 
+Make sure you run with the following env variables set in a `.env.local` file on project root:
 
-- `SPOTIFY_CLIENT_SECRET` - Secret for your [spotify app](https://developer.spotify.com/dashboard/)
-- `SPOTIFY_CLIENT_ID` - ID for your [spotify app](https://developer.spotify.com/dashboard/)
-- `NEXTAUTH_URL` - Base url
+```properties
+# Base uri for nextauth
+NEXTAUTH_URL=http://localhost:3000
 
-Example:
-
-```shell
-~$ npm install
-
-~$ SPOTIFY_CLIENT_SECRET=supersecret SPOTIFY_CLIENT_ID=veryclient NEXTAUTH_URL=http://localhost:3000 npm run dev
+# Spotify app vars, found in https://developer.spotify.com/dashboard
+SPOTIFY_CLIENT_ID=veryclient
+SPOTIFY_CLIENT_SECRET=supersecret
 ```
 
-Then point your browser to [http://localhost:3000](http://localhost:3000)
+Then install and run it:
 
-## Projects
+```shell
+$ npm install
+$ npm run dev
+```
 
-### 2021
-- [Calculating mood based on Spotify listening habits](https://kis-hackdays.vercel.app/spotify)
+Point your browser to [http://localhost:3000](http://localhost:3000)
